@@ -1,0 +1,41 @@
+.productImage {
+  width: 100%;
+  height: 225px;
+}
+.productImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.productDetail {
+  padding: 20px 0;
+}
+.productDetail h3 {
+  color: #303132;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.productImage {
+  overflow: hidden;
+  position: relative;
+}
+.quickView {
+  transition: 0.5s;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translateY(100%);
+  padding: 20px 0;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.productImage img {
+  transition: 0.5s;
+}
+.product:hover .productImage img {
+  transform: scale(120%);
+}
+.product:hover .quickView {
+  transform: translateY(0);
+}

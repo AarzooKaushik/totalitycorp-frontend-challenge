@@ -1,0 +1,174 @@
+.cartBorder {
+  width: 100%;
+  border-bottom: 1px solid rgba(48, 49, 50, 0.2);
+  margin: 20px 0;
+}
+.cartContainer {
+  font-family: "Raleway", sans-serif;
+  padding: 96px 30px;
+  max-width: 1030px;
+  margin: auto;
+  display: flex;
+  gap: 48px;
+}
+.cartContainer h1 {
+  font-size: 20px;
+  font-weight: 500;
+}
+.cartContainer h2 {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.myCart {
+  width: 100%;
+}
+
+.OrderSummary {
+  min-width: 300px;
+}
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.OrderSummary button {
+  width: 100%;
+  margin-top: 32px;
+}
+.OrderSummary button:hover {
+  background-color: rgb(85, 84, 84);
+  color: white;
+}
+.cartProductDetail,
+.productDetailInner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.productDetailInner {
+  width: 400px;
+}
+.productDetailInner p {
+  color: rgb(120, 118, 118);
+}
+.cartProductDetail img {
+  width: 100px;
+  height: 100px;
+}
+.productCount {
+  border: 1px solid rgba(48, 49, 50);
+}
+.cartProductDetail span {
+  cursor: pointer;
+}
+.productCount span {
+  padding: 10px 5px;
+}
+.emptyCartContainer {
+  padding: 150px 0;
+  width: 60%;
+  margin: auto;
+}
+.emptyCartContainer p {
+  text-align: center;
+  margin: 150px 0;
+  font-size: 20px;
+}
+.emptyCartContainer h2 {
+  font-size: 20px;
+  text-align: left;
+}
+.cartForm div {
+  max-width: 350px;
+}
+.cartForm p {
+  font-size: 16px;
+  color: rgb(152, 103, 111);
+  margin: 10px 0;
+  cursor: pointer;
+}
+.cartFormInput {
+  transition: height 0.3s;
+  overflow: hidden;
+  height: 0px;
+}
+.cartForm .show {
+  height: 100px;
+}
+.cartForm input {
+  width: 70%;
+  border: 1px solid rgba(48, 49, 50, 0.6);
+  padding: 15px;
+  outline: none;
+  color: rgb(98, 98, 98);
+}
+.cartForm button {
+  width: 30%;
+  background-color: transparent;
+  padding: 15px;
+  border: 1px solid rgb(152, 103, 111);
+  color: rgb(152, 103, 111);
+  transition: 0.5s;
+}
+.cartForm button:hover {
+  border: 1px solid rgb(184, 154, 159);
+  color: rgb(184, 154, 159);
+}
+.cartForm input::placeholder,
+.cartForm textarea::placeholder {
+  color: rgb(159, 157, 157);
+}
+.cartForm textarea {
+  width: 100%;
+  height: 100px;
+  border: 1px solid rgba(48, 49, 50, 0.6);
+  padding: 15px;
+  outline: none;
+  color: rgb(98, 98, 98);
+}
+@media (max-width: 1000px) {
+  .cartContainer {
+    gap: 30px;
+    padding: 96px 20px;
+  }
+}
+@media (max-width: 900px) {
+  .cartContainer {
+    flex-direction: column;
+    gap: 50px;
+  }
+  .OrderSummary {
+    max-width: 500px;
+    min-width: auto;
+  }
+}
+@media (max-width: 700px) {
+  .emptyCartContainer {
+    width: 90%;
+    padding: 120px 0;
+  }
+  .cartContainer {
+    padding: 56px 10px;
+  }
+}
+@media (max-width: 600px) {
+  .productDetailInner {
+    width: auto;
+    gap: 15px;
+    flex-direction: column;
+  }
+}
+@media (max-width: 400px) {
+  .cartProductDetail img {
+    width: 80px;
+    height: 80px;
+  }
+  .emptyCartContainer {
+    padding: 90px 0;
+  }
+  .cartContainer {
+    padding: 30px 10px;
+  }
+}

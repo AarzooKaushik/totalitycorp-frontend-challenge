@@ -1,0 +1,47 @@
+.error {
+  border: 1px solid red;
+}
+.formSection {
+  margin-top: 30px;
+}
+.formSection button {
+  margin-top: 20px;
+}
+.formGroup {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+.formGroup input {
+  padding: 15px 20px;
+  border: none;
+  outline: none;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  border-radius: 5px;
+  background: transparent;
+  font-size: 1em;
+}
+.formGroup span {
+  line-height: 1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  padding: 15px 20px;
+  font-size: 1em;
+  transition: 0.5s;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.6);
+  width: 100px;
+}
+.formGroup.filled span,
+.formGroup:focus-within span {
+  color: #fff;
+  font-size: 0.75em;
+  transform: translateX(10px) translateY(-7px);
+  padding: 5px;
+  background-color: rgb(48, 49, 50);
+  border-radius: 2px;
+}

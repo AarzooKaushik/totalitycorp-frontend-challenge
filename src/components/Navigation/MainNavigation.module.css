@@ -1,0 +1,52 @@
+nav {
+  background-color: rgb(83, 81, 81);
+}
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  margin: auto;
+  max-width: 1030px;
+  padding: 30px;
+}
+
+.logo {
+  color: white;
+  font-size: 30px;
+}
+
+.menuAction {
+  display: none;
+}
+.cartBtn {
+  padding: 10px 40px;
+  background-color: transparent;
+  border: 2px solid white;
+  font-size: 18px;
+  color: white;
+  transition: 0.5s;
+}
+.cartBtn:hover {
+  background-color: white;
+  color: rgb(83, 81, 81);
+}
+.cartActive .cartBtn {
+  background-color: white;
+  color: rgb(83, 81, 81);
+}
+@media (max-width: 800px) {
+  .cartBtn {
+    display: none;
+  }
+  .menuAction {
+    display: block;
+    font-size: 25px;
+    color: white;
+  }
+}
+@media (max-width: 400px) {
+  .navbar {
+    padding: 15px;
+  }
+}

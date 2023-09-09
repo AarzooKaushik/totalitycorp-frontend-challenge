@@ -1,0 +1,118 @@
+h2 {
+  font-family: "Raleway", sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+.filter {
+  min-width: 200px;
+}
+.closeFilter {
+  display: none;
+}
+.filterContain button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 25px 0;
+  font-size: 16px;
+  color: #303132;
+}
+.filterOptions {
+  max-height: 0;
+  transition: 0.3s;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.filterOptions.show {
+  max-height: 500px;
+}
+
+.filterPrices {
+  padding: 10px 0;
+  font-size: 14px;
+  color: #727272;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.filterBorder {
+  border-bottom: 1px solid rgba(48, 49, 50, 0.2);
+}
+.categoryOptions {
+  cursor: pointer;
+  text-align: left;
+  color: rgb(139, 139, 139);
+}
+.categoryOption input {
+  margin-right: 10px;
+  border: 1px solid rgb(124, 122, 122);
+  cursor: pointer;
+}
+.clearFilterBtn {
+  text-align: right;
+}
+.clearFilterBtn button {
+  margin-top: 40px;
+  padding: 10px 30px;
+  background: transparent;
+  border: 1px solid black;
+  transition: 0.5s;
+}
+.clearFilterBtn button:disabled {
+  border: 1px solid rgb(158, 158, 158);
+  color: rgb(184, 182, 182);
+  cursor: default;
+}
+
+.starRating {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.starRating span {
+  cursor: pointer;
+}
+.starRating .star {
+  color: white;
+  -webkit-text-stroke: 1px black;
+}
+.starRating .filled {
+  color: black;
+}
+@media (max-width: 750px) {
+  .closeFilter {
+    display: block;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .filter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.5s;
+    min-width: 0;
+    max-width: 0;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 99;
+    background-color: white;
+  }
+  .filter.show {
+    max-width: 100%;
+    width: 100%;
+  }
+  .filterContain {
+    padding: 20px;
+    max-width: 500px;
+    margin: 50px auto;
+  }
+}
