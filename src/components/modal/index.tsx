@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-import classes from "./Modal.module.css";
+import classes from "./style.module.css";
 
-import CheckoutForm from "../checkOutForm/index";
+import CheckoutForm, {CheckoutFormData} from "./checkoutForm";
 
-const Modal = (props) => {
+interface ModalProps {
+  onCloseHandler: () => void;
+  updateCartItems: (updatedItems: any[]) => void;
+}
+
+const Modal: React.FC<ModalProps> = (props) => {
   const [isFormVisible, setFormVisible] = useState(true);
 
-  const handleCheckout = (formData) => {
+  const handleCheckout = (formData:  CheckoutFormData)=> {
     console.log("Checkout Data:", formData);
     localStorage.setItem("cart", JSON.stringify([]));
     window.dispatchEvent(new Event("storage"));

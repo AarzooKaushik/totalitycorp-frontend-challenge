@@ -1,11 +1,23 @@
+import React from "react";
 import { Link } from "react-router-dom";
-import classes from "./Products.module.css";
+import classes from "./style.module.css";
 
-const Products = (props) => {
-  const { id, title = "i'm a prooduct", price = "", image = "" } = props;
+interface ProductsProps {
+  id: string;
+  title?: string;
+  price?: string;
+  image?: string;
+}
+
+const Products: React.FC<ProductsProps> = ({
+  id,
+  title = "I'm a product",
+  price = "",
+  image = "",
+}) => {
   return (
     <>
-      <Link to={`/shop/${id}`}>
+      <Link to={`/shop/shop/${id}`}>
         <div className={classes.product}>
           <div className={classes.productImage}>
             <img src={image} alt="Product view" />

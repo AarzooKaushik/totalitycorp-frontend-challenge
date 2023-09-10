@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Slider from "@mui/material/Slider";
 import { styled } from "@mui/material/styles";
 
-import classes from "./Filter.module.css";
+import classes from "./style.module.css";
 
 const CustomSlider = styled(Slider)`
   width: 95%;
@@ -23,29 +23,44 @@ const CustomSlider = styled(Slider)`
   }
 `;
 
-function Filters({
+interface FiltersProps {
+  updateFilter: (type: string, value?: any) => void;
+  minPrice: number;
+  maxPrice: number;
+  showFilter: boolean;
+  onHideFilter: () => void;
+  disabled: boolean;
+}
+
+const Filters: React.FC<FiltersProps> = ({
   updateFilter,
   minPrice,
   maxPrice,
   showFilter,
   onHideFilter,
   disabled,
-}) {
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [selectedRating, setSelectedRating] = useState();
-  const [range, setRange] = useState([minPrice, maxPrice]);
-  const [optionsVisibility, setOptionsVisibility] = useState({
+}) => {
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedRating, setSelectedRating] = useState<number | undefined>();
+  const [range, setRange] = useState<number[]>([minPrice, maxPrice]);
+  const [optionsVisibility, setOptionsVisibility] = useState<{
+    price: boolean;
+    rating: boolean;
+    category: boolean;
+  }>({
     price: true,
     rating: false,
     category: false,
   });
 
-  const handleChanges = (_, newValue) => {
-    setRange(newValue);
-    updateFilter("price", newValue);
+  const handleChanges = (_: any, newValue: number | number[]) => {
+    if (Array.isArray(newValue)) {
+      setRange(newValue);
+      updateFilter("price", newValue);
+    }
   };
 
-  const handleCategoryToggle = (category) => {
+  const handleCategoryToggle = (category: string) => {
     const updatedCategories = selectedCategories.includes(category)
       ? selectedCategories.filter((c) => c !== category)
       : [...selectedCategories, category];
@@ -54,20 +69,23 @@ function Filters({
     updateFilter("category", updatedCategories);
   };
 
-  const isCategorySelected = (category) =>
+  const isCategorySelected = (category: string) =>
     selectedCategories.includes(category);
 
-  const toggleOptionVisibility = (option) => {
+  const toggleOptionVisibility = (option: "price" | "category" | "rating") => {
     setOptionsVisibility((prevState) => ({
       ...prevState,
       [option]: !prevState[option],
     }));
   };
+
   const stars = [1, 2, 3, 4, 5];
-  const onRatingChange = (rating) => {
+
+  const onRatingChange = (rating: number) => {
     setSelectedRating(rating);
     updateFilter("rating", rating);
   };
+
   return (
     <div className={`${classes.filter} ${showFilter ? classes.show : ""}`}>
       <div className={classes.filterContain}>
@@ -130,7 +148,7 @@ function Filters({
                 <span
                   key={star}
                   className={
-                    star <= selectedRating ? classes.filled : classes.star
+                    star <= (selectedRating || 0) ? classes.filled : classes.star
                   }
                   onClick={() => onRatingChange(star)}
                 >
@@ -142,6 +160,14 @@ function Filters({
         )}
       </div>
       <div className={classes.clearFilterBtn}>
+      <button
+         className={classes.applyBtn}
+          onClick={() => {
+            onHideFilter();
+          }}
+        >
+          Apply Filters
+        </button>
         <button
           disabled={disabled}
           onClick={() => {
@@ -156,6 +182,6 @@ function Filters({
       </div>
     </div>
   );
-}
+};
 
 export default Filters;

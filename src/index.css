@@ -17,6 +17,7 @@ code {
   box-sizing: border-box;
 }
 a {
+  color: rgb(48, 49, 50);
   text-decoration: none;
 }
 li {

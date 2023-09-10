@@ -1,32 +1,70 @@
-// CheckoutForm.js
 import React, { useState } from "react";
 import classes from "./style.module.css";
-import Button from "../Button/Button";
-const CheckoutForm = ({ onCheckout }) => {
-  const [step, setStep] = useState(1);
-  const [isNameFilled, setIsNameFilled] = useState(false);
-  const [isAddressFilled, setIsAddressFilled] = useState(false);
-  const [isPhoneFilled, setIsPhoneFilled] = useState(false);
-  const [isCityFilled, setIsCityFilled] = useState(false);
-  const [isPostalCodeFilled, setIsPostalCodeFilled] = useState(false);
-  const [isCardNumberFilled, setIsCardNumberFilled] = useState(false);
-  const [isCardholderNameFilled, setIsCardholderNameFilled] = useState(false);
+import Button from "../button";
 
-  const [shippingInfo, setShippingInfo] = useState({
+interface CheckoutFormProps {
+  onCheckout: (data: CheckoutFormData) => void;
+}
+
+interface ShippingInfo {
+  name: string;
+  address: string;
+  phone: string;
+}
+
+interface OtherShippingInfo {
+  city: string;
+  postalCode: string;
+}
+
+interface PaymentInfo {
+  cardNumber: string;
+  cardholderName: string;
+}
+
+interface ValidationErrors {
+  name: boolean;
+  address: boolean;
+  phone: boolean;
+  city: boolean;
+  postalCode: boolean;
+  cardNumber: boolean;
+  cardholderName: boolean;
+}
+
+ export interface CheckoutFormData {
+  shippingInfo: ShippingInfo;
+  otherShippingInfo: OtherShippingInfo;
+  paymentInfo: PaymentInfo;
+}
+
+const CheckoutForm: React.FC<CheckoutFormProps> = ({ onCheckout }) => {
+  const [step, setStep] = useState<number>(1);
+  const [isNameFilled, setIsNameFilled] = useState<boolean>(false);
+  const [isAddressFilled, setIsAddressFilled] = useState<boolean>(false);
+  const [isPhoneFilled, setIsPhoneFilled] = useState<boolean>(false);
+  const [isCityFilled, setIsCityFilled] = useState<boolean>(false);
+  const [isPostalCodeFilled, setIsPostalCodeFilled] = useState<boolean>(false);
+  const [isCardNumberFilled, setIsCardNumberFilled] = useState<boolean>(false);
+  const [isCardholderNameFilled, setIsCardholderNameFilled] = useState<boolean>(false);
+
+  const [shippingInfo, setShippingInfo] = useState<ShippingInfo>({
     name: "",
     address: "",
     phone: "",
   });
 
-  const [otherShippingInfo, setOtherShippingInfo] = useState({
+  const [otherShippingInfo, setOtherShippingInfo] = useState<OtherShippingInfo>({
     city: "",
     postalCode: "",
   });
-  const [paymentInfo, setPaymentInfo] = useState({
+
+  const [paymentInfo, setPaymentInfo] = useState<PaymentInfo>({
     cardNumber: "",
     cardholderName: "",
   });
-  const [validationErrors, setValidationErrors] = useState({
+
+  const [validationErrors, setValidationErrors] = useState<ValidationErrors>({
     name: false,
     address: false,
     phone: false,
@@ -36,11 +74,15 @@ const CheckoutForm = ({ onCheckout }) => {
     cardholderName: false,
   });
 
-  const isStep1Valid = () => {
-    const errors = {
+  const isStep1Valid = (): boolean => {
+    const errors: ValidationErrors = {
       name: shippingInfo.name.trim() === "",
       address: shippingInfo.address.trim() === "",
       phone: shippingInfo.phone.trim() === "",
+      city: false,
+      postalCode: false,
+      cardNumber: false,
+      cardholderName: false,
     };
 
     setValidationErrors(errors);
@@ -48,20 +90,31 @@ const CheckoutForm = ({ onCheckout }) => {
     return !Object.values(errors).some((error) => error);
   };
 
-  const isStep2Valid = () => {
-    const errors = {
+  const isStep2Valid = (): boolean => {
+    const errors: ValidationErrors = {
       city: otherShippingInfo.city.trim() === "",
       postalCode: otherShippingInfo.postalCode.trim() === "",
+      name: false,
+      address: false,
+      phone: false,
+      cardNumber: false,
+      cardholderName: false,
     };
 
     setValidationErrors(errors);
 
     return !Object.values(errors).some((error) => error);
   };
-  const isStep3Valid = () => {
-    const errors = {
+
+  const isStep3Valid = (): boolean => {
+    const errors: ValidationErrors = {
       cardNumber: paymentInfo.cardNumber.trim() === "",
       cardholderName: paymentInfo.cardholderName.trim() === "",
+      name: false,
+      address: false,
+      phone: false,
+      city: false,
+      postalCode: false,
     };
 
     setValidationErrors(errors);
@@ -69,8 +122,9 @@ const CheckoutForm = ({ onCheckout }) => {
     return !Object.values(errors).some((error) => error);
   };
 
-  const handleNextStep = (e) => {
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+   
     if (!isStep1Valid()) {
       return;
     }
@@ -86,21 +140,30 @@ const CheckoutForm = ({ onCheckout }) => {
       if (!isStep3Valid()) {
         return;
       }
-
-      onCheckout({
+      const formData: CheckoutFormData = {
         shippingInfo: {
-          ...shippingInfo,
-          ...otherShippingInfo,
-          ...paymentInfo,
+          name: shippingInfo.name,
+          address: shippingInfo.address,
+          phone: shippingInfo.phone,
         },
-      });
+        otherShippingInfo: {
+          city: otherShippingInfo.city,
+          postalCode: otherShippingInfo.postalCode,
+        },
+        paymentInfo: {
+          cardNumber: paymentInfo.cardNumber,
+          cardholderName: paymentInfo.cardholderName,
+        },
+      };
+  
+      onCheckout(formData);
     }
   };
 
   return (
     <div className={classes.formContainer}>
       {step === 1 && (
-        <form className={classes.formSection}>
+        <form className={classes.formSection} onSubmit={handleFormSubmit}>
           <h2>Step 1: Enter Name, Address, and Phone</h2>
           <div
             className={`${classes.formGroup} ${
@@ -151,12 +214,12 @@ const CheckoutForm = ({ onCheckout }) => {
             />
             <span>Phone</span>
           </div>
-          <Button onClick={handleNextStep}>Next</Button>
+          <Button>Next</Button>
         </form>
       )}
 
-      {step === 2 && (
-        <form className={classes.formSection}>
+{step === 2 && (
+        <form className={classes.formSection} onSubmit={handleFormSubmit}>
           <h2>Step 2: Enter Other Shipping Details</h2>
           <div
             className={`${classes.formGroup} ${
@@ -197,12 +260,12 @@ const CheckoutForm = ({ onCheckout }) => {
             />
             <span>Pin</span>
           </div>
-          <Button onClick={handleNextStep}>Next</Button>
+          <Button>Next</Button>
         </form>
       )}
 
       {step === 3 && (
-        <form className={classes.formSection}>
+        <form className={classes.formSection} onSubmit={handleFormSubmit}>
           <h2>Step 3: Enter Payment Details</h2>
           <div
             className={`${classes.formGroup} ${
@@ -243,7 +306,7 @@ const CheckoutForm = ({ onCheckout }) => {
             />
             <span>Cardholder</span>
           </div>
-          <Button onClick={handleNextStep}>Place Order</Button>
+          <Button>Place Order</Button>
         </form>
       )}
     </div>

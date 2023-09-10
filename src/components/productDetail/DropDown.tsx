@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 
+interface CustomDropdownProps {
+  value: string | null;
+  onChange: (value: string) => void;
+}
+
 const SelectWrapper = styled.div`
   position: relative;
 `;
 
-const SelectHeader = styled.div`
+const SelectHeader = styled.div<{ isOpen: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -15,7 +20,7 @@ const SelectHeader = styled.div`
   background-color: ${({ isOpen }) => (isOpen ? "#f2f2f2" : "transparent")};
 `;
 
-const SelectOptions = styled.ul`
+const SelectOptions = styled.ul<{ isOpen: boolean }>`
   position: absolute;
   top: 100%;
   left: 0;
@@ -33,10 +38,11 @@ const SelectOption = styled.li`
   &:hover {
     background-color: #f2f2f2;
   }
-`;
+}`;
+
 const options = ["small", "medium", "large"];
 
-const CustomDropdown = (props) => {
+const CustomDropdown: React.FC<CustomDropdownProps> = (props) => {
   const { value, onChange } = props;
   const [isOpen, setIsOpen] = useState(false);
 
@@ -44,7 +50,7 @@ const CustomDropdown = (props) => {
     setIsOpen(!isOpen);
   };
 
-  const handleOptionSelect = (option) => {
+  const handleOptionSelect = (option: string) => {
     onChange(option);
     setIsOpen(false);
   };

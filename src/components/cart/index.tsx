@@ -1,27 +1,40 @@
-import React from "react";
-import classes from "./Cart.module.css";
-import Button from "../Button/Button";
+import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import classes from "./style.module.css";
+import Button from "../button";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useState, useEffect } from "react";
-import ModalContainer from "../Modal/Modal";
+import ModalContainer from "../modal/index";
 
-const Cart = () => {
-  const [cartItems, setCartItems] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+interface CartItem {
+  id: number;
+  title: string;
+  price: number;
+  image: string;
+  color: string;
+  size?: string;
+  quantity: number;
+  totalPrice: number;
+}
+
+interface CartProps {}
+
+const Cart: React.FC<CartProps> = () => {
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   useEffect(() => {
-    const storedCartItems = JSON.parse(localStorage.getItem("cart"));
-    setCartItems(storedCartItems || []);
+    const storedCartItems = JSON.parse(localStorage.getItem("cart") || "[]");
+    setCartItems(storedCartItems);
   }, []);
 
-  const updateCartItems = (updatedItems) => {
+  const updateCartItems = (updatedItems: CartItem[]) => {
     setCartItems(updatedItems);
     localStorage.setItem("cart", JSON.stringify(updatedItems));
     window.dispatchEvent(new Event("storage"));
   };
 
-  const incrementHandler = (id, size) => {
+  const incrementHandler = (id: number, size: string) => {
     const updatedCartItems = cartItems.map((cartItem) => {
       if (cartItem.id === id && cartItem.size === size) {
         return {
@@ -36,7 +49,7 @@ const Cart = () => {
     updateCartItems(updatedCartItems);
   };
 
-  const decrementHandler = (id, size) => {
+  const decrementHandler = (id: number, size: string) => {
     const updatedCartItems = cartItems.map((cartItem) => {
       if (
         cartItem.id === id &&
@@ -55,7 +68,7 @@ const Cart = () => {
     updateCartItems(updatedCartItems);
   };
 
-  const removeItemHandler = (id, size) => {
+  const removeItemHandler = (id: number, size: string) => {
     const updatedCartItems = cartItems.filter(
       (cartItem) => !(cartItem.id === id && cartItem.size === size)
     );
@@ -85,45 +98,38 @@ const Cart = () => {
             <h1>My Cart</h1>
             <div className={classes.cartBorder}></div>
             <div className={classes.cartItems}>
-              {cartItems.map((item) => {
-                const key = `${item.id}-${item.size}`;
-                return (
-                  <React.Fragment key={key}>
-                    <div className={classes.cartProductDetail}>
-                      <img src={item.image} alt="product" />
-                      <div className={classes.productDetailInner}>
-                        <div>
-                          <h2>{item.title}</h2>
-                          <p>${item.price}</p>
-                          <p>color : {item.color}</p>
-                          {item.size && <p>Size : {item.size}</p>}
-                        </div>
-                        <div className={classes.productCount}>
-                          <span
-                            onClick={() => decrementHandler(item.id, item.size)}
-                          >
-                            -
-                          </span>
-                          <span> {item.quantity} </span>
-                          <span
-                            onClick={() => incrementHandler(item.id, item.size)}
-                          >
-                            +
-                          </span>
-                        </div>
-                        <h2>${item.totalPrice.toFixed(2)} </h2>
-                      </div>
-                      <span
-                        onClick={() => removeItemHandler(item.id, item.size)}
-                      >
-                        &#10006;
-                      </span>
-                    </div>
-                    <div className={classes.cartBorder}></div>
-                  </React.Fragment>
+            {cartItems.map((item) => {
+      if (!item) {
+        return null;
+      }
+      const key = `${item.id}-${item.size}`;
+      return (
+        <React.Fragment key={key}>
+          <div className={classes.cartProductDetail}>
+            <img src={item.image} alt="product" />
+            <div className={classes.productDetailInner}>
+              <div>
+                <h2>{item.title}</h2>
+                <p>${item.price}</p>
+                <p>color : {item.color}</p>
+                {item.size && <p>Size : {item.size}</p>}
+              </div>
+              <div className={classes.productCount}>
+                <span onClick={() => decrementHandler(item.id, item.size || "")}> - </span>
+                <span> {item.quantity} </span>
+                <span onClick={() => incrementHandler(item.id, item.size || "")}> + </span>
+              </div>
+              <h2>${item.totalPrice.toFixed(2)} </h2>
+            </div>
+            <span onClick={() => removeItemHandler(item.id, item.size || "")}> &#10006; </span>
+          </div>
+          <div className={classes.cartBorder}></div>
+        </React.Fragment>
                 );
               })}
+            
             </div>
+            <NavLink to="/shop">Go back to shopping.</NavLink>
           </div>
           <div className={classes.OrderSummary}>
             <h1>Order Summary</h1>
@@ -161,4 +167,5 @@ const Cart = () => {
     </>
   );
 };
+
 export default Cart;

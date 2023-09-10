@@ -12,10 +12,24 @@ nav {
 }
 
 .logo {
+  text-transform: capitalize;
   color: white;
-  font-size: 30px;
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 1;
 }
-
+.userDetails {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+.userDetails img {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
 .menuAction {
   display: none;
 }

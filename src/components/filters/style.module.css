@@ -68,7 +68,9 @@ h2 {
   color: rgb(184, 182, 182);
   cursor: default;
 }
-
+.applyBtn {
+  display: none;
+}
 .starRating {
   font-size: 20px;
   display: flex;
@@ -93,6 +95,15 @@ h2 {
     right: 30px;
     font-size: 20px;
     cursor: pointer;
+  }
+  .applyBtn {
+    display: block;
+  }
+  .clearFilterBtn {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   .filter {
     position: absolute;

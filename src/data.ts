@@ -1,4 +1,13 @@
-const PRODUCTS = [
+export type Product = {
+  name: string;
+  price: number;
+  category: string;
+  rating: number;
+  id: string;
+  image: string;
+};
+
+const PRODUCTS: Product[] = [
   {
     name: "T-shirt",
     price: 15.0,

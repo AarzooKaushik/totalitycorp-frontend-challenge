@@ -1,11 +1,13 @@
-import classes from "./Shop.module.css";
-import Filter from "./Filter";
-import Products from "./product";
-import PRODUCTS from "../../data";
-import { useState } from "react";
+import React, { useState } from "react";
+import classes from "./style.module.css";
+import Filter from "../filters/index";
+import Products from "../products/index";
+import PRODUCTS, { Product } from "../../data";
 
-const Shop = () => {
-  const [filteredProducts, setFilteredProducts] = useState(PRODUCTS);
+interface ShopProps {}
+
+const Shop: React.FC<ShopProps> = () => {
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>(PRODUCTS);
   const [showFilter, setShowFilter] = useState(false);
 
   const minPrice = PRODUCTS.reduce((min, product) => {
@@ -20,8 +22,8 @@ const Shop = () => {
     setShowFilter(false);
   };
 
-  const updateFilter = (filterType, filterValue) => {
-    let updatedProducts = [];
+  const updateFilter = (filterType: string, filterValue: any) => {
+    let updatedProducts: Product[] = [];
 
     if (filterType === "price") {
       updatedProducts = PRODUCTS.filter((product) => {
@@ -79,7 +81,7 @@ const Shop = () => {
                     key={item.id}
                     id={item.id}
                     title={item.name}
-                    price={item.price}
+                    price={item.price.toString()}
                     image={item.image}
                   ></Products>
                 );
@@ -95,3 +97,4 @@ const Shop = () => {
 };
 
 export default Shop;
+
