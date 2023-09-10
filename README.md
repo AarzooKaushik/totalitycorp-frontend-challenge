@@ -1,70 +1,30 @@
-# Getting Started with Create React App
+Approach
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1 = Tech Stack :
 
-## Available Scripts
+. This application is built using react.js.
+. I have used react-router-dom to navigate through pages without reloading.
+. Typescript is also used in this project.
+. I have used mui/styled for some styled components like slider and dropdown.
+. I have also used react-toastify for toast messages.
 
-In the project directory, you can run:
+2 = Features :
 
-### `npm start`
+. Key features of our application include user login, product listing, shopping cart functionality and a three step checkout process.
+. This website is completely responsive for all screen sizes.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3 = Project Goals :
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+. This application is built for Totalitycorp frontend challenge.
 
-### `npm test`
+4 = Process :
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+. In the very starting of the application, the user will get a loginform in which the user have to fill the name and number to navigate to the shop page.
+. In the navigation the user will get his/her name.
+. On shop page the user will get a list of products which the user can filter on the basis pf price range, category and rating.
+. On clicking on any product the user will navigate to the detail page of that product.
+. On that detail page user can select the size and quanity of th eproduct and then add it to the cart.
+. On clicking cart button the user will navigate to the cart in which the user can increase or decrease the quantity of any product and the user can also remove the product from the cart.
+. In the summary user will get the total price of all products in the cart.
+. On clicking the checkout button the user will get a form to fill shipping and payment details.
+. This form is a three step form and in the last step on clicking the place order button the order will be finally placed.
